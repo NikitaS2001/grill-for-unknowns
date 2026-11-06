@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+
+Docs-only patch.
+
+- README: the "working hypothesis" section no longer pins a model generation ("GPT 5.5/5.6-style"). It now describes literal, execution-focused models generically, so the document does not go stale with every model release. No skill-behavior changes.
+
 ## 0.2.0
 
 Upstream-sync release — ports the current `mattpocock/skills` grilling loop into this skill.

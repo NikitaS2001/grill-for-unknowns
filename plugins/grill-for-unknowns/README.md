@@ -13,11 +13,11 @@ The intended behavior is simple:
 
 > Inspect the real territory first, grill the plan and user only where decisions matter, surface blindspots, write down the shared understanding, then build.
 
-## Why this should help GPT-style models too
+## Why this should help execution-focused models too
 
 This skill is not Claude/Fable-specific magic. It is model-agnostic prompting hygiene: proactively extract the missing context from the user, docs, source, tests, and domain language **before** asking the model to execute.
 
-A useful working hypothesis for GPT 5.5/5.6-style models:
+A useful working hypothesis for literal, execution-focused models:
 
 - They are strong at precise execution, planning, tool use, and consistency once the spec is clear.
 - They may be more literal and execution-focused than Claude/Fable-style models.
