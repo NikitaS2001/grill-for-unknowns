@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0
+
+Upstream-sync release — ports the current `mattpocock/skills` grilling loop into this skill.
+
+- **Frontier rounds** replace one-question-at-a-time interviewing: ask every material question whose prerequisites are settled in one numbered round with recommended answers, wait, recompute the frontier, repeat until empty. Facts are retrieved by the agent (or a sub-agent), never asked of the user.
+- **Yes-wording** (upstream #1193): each question is worded so "yes" accepts the recommended answer; agreeing never means answering "no".
+- **GLOSSARY convention** (upstream rename): the domain ledger file is now `GLOSSARY.md` instead of the legacy `CONTEXT.md`. Template renamed; a migration section tells the agent to offer `git mv CONTEXT.md GLOSSARY.md` once instead of maintaining both files.
+- Fork-specific controls preserved: ~5-question session budget (counted across rounds), fatigue valve, assumptions-list exit.
+
 ## 0.1.3
 
 Distribution release — one-command installs and updates for Claude Code, and a `git pull` update path for every other agent.
