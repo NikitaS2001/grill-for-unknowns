@@ -20,7 +20,7 @@ The core idea is:
 - **The territory** = the real codebase, product constraints, APIs, docs, user taste, deployment environment, and failure modes.
 - **Unknowns** = the gap between the map and the territory.
 
-This skill combines docs-grounded grilling, one-question-at-a-time interviewing, domain modeling, and a four-quadrant unknowns pass.
+This skill combines docs-grounded grilling, frontier-round interviewing, domain modeling, and a four-quadrant unknowns pass.
 
 Grilling here means few, evidence-priced questions — not relentless interrogation; not asking about a non-material topic is correct behavior. The goal is to discover the few answers that would materially change the plan (see the **Material** criterion below) — and to write down the shared understanding as it forms.
 
@@ -53,10 +53,10 @@ Default sequence:
 2. **Read the territory** — inspect the relevant docs/source/tests/config before grilling. Do not rely on vibes if docs or code are available.
 3. **Open a grill session ledger** — use `templates/grill-session.md` when the session is complex enough to need a durable working doc.
 4. **Build the unknowns ledger** — classify per the Unknowns Taxonomy below.
-5. **Build the domain ledger** — identify fuzzy terms, overloaded concepts, vocabulary conflicts, and context boundaries. Use `references/domain-modeling-add-on.md` for `CONTEXT.md` / ADR rules.
+5. **Build the domain ledger** — identify fuzzy terms, overloaded concepts, vocabulary conflicts, and context boundaries. Use `references/domain-modeling-add-on.md` for `GLOSSARY.md` / ADR rules.
 6. **Grill one decision at a time** — follow the grill procedure below.
 7. **Propose defaults** — for low-risk unknowns, choose a sensible default and label it as an assumption instead of blocking.
-8. **Persist shared understanding** — update `CONTEXT.md` for crystallized domain terms and offer ADRs when the Domain Modeling criteria are met.
+8. **Persist shared understanding** — update `GLOSSARY.md` for crystallized domain terms and offer ADRs when the Domain Modeling criteria are met.
 9. **Create or revise the plan** — see Implementation Plan Requirements below.
 10. **Ask for confirmation before build** — do not enact the plan until the user confirms shared understanding, unless they explicitly authorize proceeding with labeled assumptions.
 11. **During implementation** — keep implementation notes for deviations and newly discovered unknowns.
@@ -103,31 +103,40 @@ Bad grill questions:
 - Asking the user to verbalize taste they can only recognize when shown ("what does modern mean to you?") — route those to prototypes and references instead.
 - Open-ended "anything else?" questions with no context.
 
-### 3. Ask one material question at a time when blocked
+### 3. Grill in frontier rounds when blocked
 
-If an answer is required to proceed, ask one question, explain why it matters, and give a recommended default. Walk the design tree branch-by-branch — do not dump the whole tree on the user at once.
+Work the design tree in **rounds**. The **frontier** is every material question whose prerequisites are already settled — the questions you can ask _now_ without guessing at answers you have not heard yet.
 
-Template:
+1. Ask the whole frontier in one round: number each question and give your recommended answer.
+2. Wait for the user's answers before the next round.
+3. Each round of answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round.
+4. The grill is done when the frontier is empty — every branch visited, nothing left silently assumed. Do not build until the user confirms the shared understanding.
+
+Finding facts is your job, never the user's: when a frontier question needs a fact from docs, source, or tests, look it up yourself or dispatch a sub-agent — do not ask the user for anything you can retrieve. Do not block on it: only questions downstream of a running exploration wait for it to report; ask the rest of the frontier now. A question whose answer depends on another still-open question of the same round belongs to a later round, not this one.
+
+Template (for each numbered question of the round):
 
 ```md
-Blocking question: <question>
+Blocking question N: <question>
 Why it matters: <what changes if answer A vs B>
 Evidence: <doc/source/test/reference citation>
 Recommended answer: <default + rationale>
 If you don't care: I'll proceed with <default>.
 ```
 
+Word each question so that "yes" accepts the recommended answer: agreeing must never mean answering "no".
+
 If multiple questions are useful but not blocking, keep them in the grill queue and ask the next unresolved material decision first.
 
 Budget and exit rules:
 
-- Default budget: ~5 blocking questions per session. Going beyond it requires asking the user whether to continue.
+- Default budget: ~5 blocking questions per session, counted across rounds. Going beyond it requires asking the user whether to continue.
 - **Fatigue valve**: if the user's answers turn short or impatient (one-word replies, "just pick"), stop interviewing — convert the remaining unknowns to labeled defaults and present them as one batch for veto.
-- Once no blocking questions remain, do not keep asking one at a time: present the residual low-risk unknowns as a single assumptions list for veto.
+- Once no blocking questions remain, present the residual low-risk unknowns as a single assumptions list for veto.
 
 ## Domain Modeling: Shared Language and ADRs
 
-Grilling must also maintain shared language. During the grill, challenge fuzzy or overloaded terms immediately, compare the user's terms against existing `CONTEXT.md`, code identifiers, docs, and product copy, and update `CONTEXT.md` when a term crystallizes (glossary only — no plans, scratchpads, or ADR content).
+Grilling must also maintain shared language. During the grill, challenge fuzzy or overloaded terms immediately, compare the user's terms against existing `GLOSSARY.md`, code identifiers, docs, and product copy, and update `GLOSSARY.md` when a term crystallizes (glossary only — no plans, scratchpads, or ADR content).
 
 Offer an ADR only when the decision is (1) hard to reverse, (2) surprising without context, and (3) the result of a real trade-off; otherwise record it in the session/implementation notes. See `references/domain-modeling-add-on.md` for file layout, formats, and examples.
 
@@ -237,3 +246,7 @@ Before finalizing implementation:
 ---
 
 Adapted from Matt Pocock's `grilling` + `domain-modeling` skills and Thariq's "Finding Your Unknowns" article — see `README.md` for full attribution.
+
+## Legacy Glossary Migration
+
+If the project already tracks a legacy `CONTEXT.md`, offer `git mv CONTEXT.md GLOSSARY.md` once instead of creating a second file, then keep updating `GLOSSARY.md`.

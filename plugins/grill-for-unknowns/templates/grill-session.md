@@ -53,7 +53,7 @@ Canonical terms discovered or challenged:
 | --- | --- | --- | --- |
 | | | | |
 
-Should update `CONTEXT.md`? yes/no
+Should update `GLOSSARY.md`? yes/no
 
 ## Design tree
 

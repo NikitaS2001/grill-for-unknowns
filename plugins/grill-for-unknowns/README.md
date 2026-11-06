@@ -87,7 +87,7 @@ The upstream skills are deliberately minimal and compositional: `grilling` is a 
 2. **It defines what a good question is.** "Relentless" is a personality, not a quality bar. Here every question must be material, grounded in evidence, and answerable, using a template that forces a citation, a why-it-matters, and a recommended default. Low-risk unknowns become labeled assumptions instead of questions at all.
 3. **It is self-contained.** `grill-with-docs` silently depends on two other skills being installed; an agent that loads only the headline file gets almost nothing. This skill inlines the grilling loop and the domain-modeling rules, so it works dropped into any agent — Hermes, Claude Code, or Codex.
 4. **It extends past the planning boundary.** Upstream ends at "don't build until shared understanding is confirmed." This skill covers what happens after alignment: a launch packet for subagents and long-running coding agents, a deviation policy (continue-and-log vs. stop-and-ask), implementation notes for newly discovered unknowns, and a post-implementation explainer/quiz.
-5. **It produces durable artifacts.** Session ledgers, launch packets, implementation notes, `CONTEXT.md`, and ADRs give the shared understanding a reusable written shape instead of leaving it in the chat transcript.
+5. **It produces durable artifacts.** Session ledgers, launch packets, implementation notes, `GLOSSARY.md`, and ADRs give the shared understanding a reusable written shape instead of leaving it in the chat transcript.
 
 ## Folder contents
 
@@ -100,7 +100,7 @@ grill-for-unknowns/
 │   └── domain-modeling-add-on.md
 └── templates/
     ├── ADR.md
-    ├── CONTEXT.md
+    ├── GLOSSARY.md
     ├── grill-session.md
     ├── implementation-notes.md
     └── launch-packet.md

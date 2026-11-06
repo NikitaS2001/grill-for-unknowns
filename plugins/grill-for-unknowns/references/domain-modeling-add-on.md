@@ -8,7 +8,7 @@ Most projects can use:
 
 ```txt
 /
-├── CONTEXT.md
+├── GLOSSARY.md
 ├── docs/
 │   └── adr/
 │       ├── 0001-example-decision.md
@@ -24,26 +24,26 @@ Multi-context projects may use:
 ├── docs/adr/                 # system-wide decisions
 └── src/
     ├── ordering/
-    │   ├── CONTEXT.md
+    │   ├── GLOSSARY.md
     │   └── docs/adr/         # context-specific decisions
     └── billing/
-        ├── CONTEXT.md
+        ├── GLOSSARY.md
         └── docs/adr/
 ```
 
-Create files lazily. Do not add `CONTEXT.md` or ADRs until there is something worth recording.
+Create files lazily. Do not add `GLOSSARY.md` or ADRs until there is something worth recording.
 
-## CONTEXT.md purpose
+## GLOSSARY.md purpose
 
-`CONTEXT.md` is a glossary / ubiquitous language file. It is **not** a spec, scratchpad, implementation notes file, or ADR.
+`GLOSSARY.md` is a glossary / ubiquitous language file. It is **not** a spec, scratchpad, implementation notes file, or ADR.
 
 Use it to record terms that are specific to the domain/project context.
 
 Do not add generic programming concepts just because the project uses them.
 
-## CONTEXT.md format
+## GLOSSARY.md format
 
-Use `../templates/CONTEXT.md` as the skeleton.
+Use `../templates/GLOSSARY.md` as the skeleton.
 
 Rules:
 
@@ -61,7 +61,7 @@ Challenge language immediately:
 - "The code uses `Project`, but the plan says `Job`. Should `Job` become the canonical product term, or should the plan use `Project`?"
 - "Your glossary defines `Cancellation` as canceling the whole order, but the new flow implies partial cancellation. Which is the domain truth?"
 
-When a term crystallizes, update `CONTEXT.md` immediately rather than batching.
+When a term crystallizes, update `GLOSSARY.md` immediately rather than batching.
 
 ## ADR rules
 
@@ -93,3 +93,7 @@ Use `../templates/ADR.md` as the skeleton: a short title plus 1-3 sentences (con
 - Deliberate deviation from the obvious path.
 - Constraint not visible in code.
 - Non-obvious rejected alternative.
+
+## Legacy `CONTEXT.md` migration
+
+If a project already tracks a legacy `CONTEXT.md`, offer `git mv CONTEXT.md GLOSSARY.md` once, then keep updating `GLOSSARY.md`. Do not maintain both files.
